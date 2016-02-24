@@ -1,0 +1,32 @@
+<ul class="horizontalFormList">
+    <div class="formTitle">Add Quiz</div>
+    <form id="formView">
+        <li class="fullInput">
+            <span class="labelWrapper"><label>Name</label></span>
+                <span class="inputWrapper">
+                    <span class="inputInner">
+                        <input type="text" class="inputText" ng-model="name" />
+                        <span id="nameErrorMessage" class="errorMessage"></span>
+                    </span>
+                </span>
+            <div class="clear"></div>
+        </li>
+        <li class="fullInput">
+            <span class="labelWrapper"><label>Category</label></span>
+                <span class="inputWrapper">
+                    <span class="inputInner">
+                        <select class="inputSelect" ng-model="category"
+                                ng-options="c as c.name for c in quizCategories track by c.id"
+                        ></select>
+                        <span id="categoryErrorMessage" class="errorMessage"></span>
+                    </span>
+                </span>
+            <div class="clear"></div>
+        </li>
+    </form>
+</ul>
+<div class="submitWrapper">
+    <button class="btn btn-default submit" ng-click="submit()">Submit</button>
+    <a class="btn btn-default cancel" ng-href='#/quiz-list'>Cancel</a>
+    <div class="clear"></div>
+</div>

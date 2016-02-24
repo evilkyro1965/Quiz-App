@@ -1,0 +1,26 @@
+{
+  "name": "QuizApp",
+  "homepage": "https://github.com/evilkyro1965/Quiz-App",
+  "authors": [
+    "Fahrur <evilkyro1965@yahoo.com>"
+  ],
+  "description": "QuizApp Javascript Package",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~1.12.0",
+    "bootstrap": "~3.3.6",
+    "angular": "~1.5.0",
+    "angular-mocks": "~1.5.0",
+    "angular-route": "~1.5.0",
+    "angular-resource": "~1.5.0"
+  }
+}

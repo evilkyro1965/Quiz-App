@@ -1,0 +1,329 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+@font-face {
+    font-family: HelveticaNeue;
+    src: url("../fonts/HelveticaNeueLTPro-Md.otf") format("opentype");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: HelveticaNeue, sans-serif;
+    /*background: url(../images/content-bg.png) left repeat-y #ffffff;*/
+    font-size:12px;
+    /*background-color: #ffffff;*/
+}
+
+.clear { clear: both; }
+
+/*==================================================
+ * Bottom Shadow
+ * ===============================================*/
+.bottomShadow
+{
+    box-shadow: 0px 4px 10px 0px #999;
+}
+
+#header {
+    background: #2f77b1;
+    padding: 15px 0 15px 15px;
+    color:#ffffff;
+    box-shadow: 0px 4px 10px 0px #bbb;
+}
+
+#content {
+    padding: 15px 30px 0 0;
+    color:#2f77b1;
+}
+#main-content {
+    margin-left: 30px;
+}
+
+#sidebar {
+    width: 384px;
+    float: left;
+}
+#sidebar ul {
+    list-style: inside;
+}
+.sidebarContent {
+    padding: 15px 15px 0 15px;
+}
+
+.verticalFormList {
+    margin: 0 0 -2em;
+}
+
+.verticalFormList li {
+    list-style: none;
+    padding-bottom: 1em;
+}
+
+.verticalFormList label {
+    display: block;
+    padding-bottom: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.7em;
+    color: #444;
+}
+.verticalFormList label.checkboxRadioLabel {
+    display: inline-block;
+    padding-bottom: 0em;
+    font-size: 0.5em;
+    margin-right:10px;
+}
+.verticalFormList .k-button {
+    font-size:16px;
+}
+.verticalFormList .submit {
+    float:right;
+}
+.verticalFormList .cancel {
+    float:right;
+    margin-right:10px;
+}
+.verticalFormList .fullwidthInput {
+    width:100%;
+}
+.k-grid {
+    font-size: 12px;
+}
+#grid tbody .gridCommandButton, .k-ie8 #grid tbody button.gridCommandButton {
+    min-width:25px;
+    width:25px;
+    font-size:14px;
+}
+
+.operationList {
+    margin-top:-15px;
+}
+
+.operationList li {
+    list-style:none;
+    float:left;
+    text-align:center;
+}
+.operationList li a {
+    display:inline-block;
+    color:#ffffff;
+    text-decoration:none;
+    width:75px;
+    height:60px;
+    line-height:60px;
+    background-color:#707070;
+    border-left:1px #b3b3b3 solid;
+    border-right:1px #5d5d5d solid;
+    color:#ffffff;
+    text-align:center;
+}
+.operationList li.active a{
+    background-color:#ffffff;
+    border-left:1px #ffffff solid;
+    border-right:1px #ffffff solid;
+    color:#707070;
+}
+
+.operationList li:first-child a{
+    border-left:none;
+}
+.operationList li.active:first-child a{
+    border-left:none;
+}
+
+.gridTitle {
+    height:60px;
+    font-size:36px;
+    float:left;
+}
+.gridCommandWrapper {
+    float:right;
+    padding-top:10px;
+}
+
+.gridTitleWrapper {
+    height:60px;
+}
+
+.requiredField {
+    color:red;
+}
+
+.horizontalFormList {
+    padding:10px 20px;
+}
+.horizontalFormList.twoColumnForm {
+    padding:10px 0px;
+}
+.horizontalFormList li {
+    list-style: none;
+    border-bottom: 1px #ffffff solid;
+    min-height:28px;
+}
+.horizontalFormList.twoColumnForm li {
+    list-style: none;
+    background:none;
+    border-bottom: 1px #ffffff solid;
+}
+
+.horizontalFormList .fullInput {
+    background-color:#D3D3D3;
+}
+
+.horizontalFormList .labelWrapper {
+    float:left;
+    width:30%;
+    height:100%;
+    padding-top:5px;
+}
+.horizontalFormList .labelWrapper label {
+    display: block;
+    height:100%;
+    padding-top:5px;
+    padding-left:10px;
+}
+.horizontalFormList .inputWrapper {
+    float:left;
+    width:70%;
+    height:100%;
+    background-color:#EDEDED;
+    padding:5px 10px;
+}
+.horizontalFormList .inputWrapper input {
+}
+.horizontalFormList .inputWrapper .inputText {
+    height:22px;
+    line-height: 22px;
+    width:100%;
+}
+.horizontalFormList .inputWrapper .inputSelect {
+    height:22px;
+    line-height: 22px;
+    width:100%;
+}
+
+.horizontalFormList .inputWrapper .inputInner {
+    display: block;
+    padding:10px;
+    height:100%;
+}
+.horizontalFormList .fullwidthInput {
+    width:100%;
+}
+
+.horizontalFormList li:nth-child(even) {
+}
+
+.formTitle {
+    font-size:28px;
+    color:#333;
+    background-color:#EDEDED;
+    border-bottom: 1px #ffffff solid;
+    padding:5px 10px;
+}
+
+.formSectionTitle {
+    margin-top:10px;
+    margin-bottom:10px;
+    font-size:14px;
+    color:#2f77b1;
+}
+.submitWrapper {
+    padding:0px 20px 20px 20px;
+}
+.submitWrapper .submit {
+    float:right;
+}
+.submitWrapper .cancel {
+    float:right;
+    margin-right:10px;
+}
+.errorMessage {
+    color:red;
+}
+
+.twoColumnDiv {
+
+}
+    .leftColumn {
+        float:left;
+    }
+    .rightColumn {
+        float:left;.
+    }
+
+.ob-right {
+    text-align: right;
+}
+
+.modalMessage {
+    height:80px;
+}
+.modalButtonWrapper a {
+    float:right;
+}
+
+.modalButtonWrapper .ok {
+    width:80px;
+}
+
+.mainView {
+    padding:20px;
+}
+
+.rightPagination {
+    float:right;
+    margin-top:0px;
+}
+
+.pageHeader {
+    margin-bottom:10px;
+}
