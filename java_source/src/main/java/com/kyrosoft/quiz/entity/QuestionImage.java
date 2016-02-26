@@ -3,12 +3,17 @@
  */
 package com.kyrosoft.quiz.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 
 /**
  * Created by Administrator on 2/18/2016.
  */
 @Entity(name="question_image")
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class,
+        property = "@QuestionImage")
 public class QuestionImage extends UserOwnedEntity {
 
     @Basic

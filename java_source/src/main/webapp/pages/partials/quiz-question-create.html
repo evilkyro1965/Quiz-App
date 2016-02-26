@@ -1,5 +1,5 @@
 <ul class="horizontalFormList">
-    <div class="formTitle">Create Quiz Question</div>
+    <div class="formTitle">Create Quiz Question of {{quiz.name}}</div>
     <form id="formView">
         <li class="fullInput">
             <span class="labelWrapper"><label>No</label></span>
@@ -12,10 +12,74 @@
             <div class="clear"></div>
         </li>
         <li class="fullInput">
-            <span class="labelWrapper"><label>Question Image</label></span>
+            <span class="labelWrapper"><label>Question Image <br/>( Upload images first and copy the
+                image name in question text editor )</label></span>
                 <span class="inputWrapper">
                     <span class="inputInner">
                         <input id="fileupload" type="file" name="file">
+                        <!-- The global progress bar -->
+                        <div id="progress" class="progress-animated">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <div id="uploadedFiles" class="uploadedFiles">
+
+                        </div>
+                    </span>
+                </span>
+            <div class="clear"></div>
+        </li>
+        <li class="fullInput">
+            <span class="labelWrapper"><label>Question</label></span>
+                <span class="inputWrapper">
+                    <span class="inputInner">
+                        <textarea id="questionTextarea" ui-tinymce="tinymceOptions" ng-model="question"></textarea>
+                    </span>
+                </span>
+            <div class="clear"></div>
+        </li>
+        <li class="fullInput">
+            <span class="labelWrapper"><label>Choice A</label></span>
+                <span class="inputWrapper">
+                    <span class="inputInner">
+                        <textarea id="choiceA" ui-tinymce="tinymceOptions" ng-model="choiceA"></textarea>
+                    </span>
+                </span>
+            <div class="clear"></div>
+        </li>
+        <li class="fullInput">
+            <span class="labelWrapper"><label>Choice B</label></span>
+                <span class="inputWrapper">
+                    <span class="inputInner">
+                        <textarea id="choiceB" ui-tinymce="tinymceOptions" ng-model="choiceB"></textarea>
+                    </span>
+                </span>
+            <div class="clear"></div>
+        </li>
+        <li class="fullInput">
+            <span class="labelWrapper"><label>Choice C</label></span>
+                <span class="inputWrapper">
+                    <span class="inputInner">
+                        <textarea id="choiceC" ui-tinymce="tinymceOptions" ng-model="choiceC"></textarea>
+                    </span>
+                </span>
+            <div class="clear"></div>
+        </li>
+        <li class="fullInput">
+            <span class="labelWrapper"><label>Choice D</label></span>
+                <span class="inputWrapper">
+                    <span class="inputInner">
+                        <textarea id="choiceD" ui-tinymce="tinymceOptions" ng-model="choiceD"></textarea>
+                    </span>
+                </span>
+            <div class="clear"></div>
+        </li>
+        <li class="fullInput">
+            <span class="labelWrapper"><label>Correct Answer</label></span>
+                <span class="inputWrapper">
+                    <span class="inputInner">
+                        <select class="inputSelect" ng-model="correctAnswer"
+                                ng-options="c as c.name for c in multipleChoiceSelect track by c.id"
+                        ></select>
                     </span>
                 </span>
             <div class="clear"></div>
@@ -24,6 +88,6 @@
 </ul>
 <div class="submitWrapper">
     <button class="btn btn-default submit" ng-click="submit()">Submit</button>
-    <a class="btn btn-default cancel" ng-href='#/quiz-list'>Cancel</a>
+    <a class="btn btn-default cancel" ng-href='#/quiz-question-list/{{id}}'>Cancel</a>
     <div class="clear"></div>
 </div>

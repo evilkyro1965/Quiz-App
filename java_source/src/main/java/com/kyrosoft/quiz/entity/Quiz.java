@@ -1,5 +1,8 @@
 package com.kyrosoft.quiz.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -7,6 +10,8 @@ import java.util.List;
  * Created by Administrator on 2/18/2016.
  */
 @Entity(name="quiz")
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class,
+        property = "@Quiz")
 public class Quiz extends UserOwnedEntity {
 
     @OneToMany(mappedBy = "quiz",cascade={CascadeType.MERGE, CascadeType.PERSIST})

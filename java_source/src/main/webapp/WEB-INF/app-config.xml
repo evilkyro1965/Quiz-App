@@ -7,12 +7,15 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
 		http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -23,8 +26,8 @@
 
     <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
 
-    <context:component-scan base-package="com.kyrosoft.quiz.service.impl,com.kyrosoft.quiz.web,com.kyrosoft.quiz.config" />
-    <jpa:repositories base-package="com.kyrosoft.quiz.service.impl" />
+    <context:component-scan base-package="com.kyrosoft.quiz.service.impl,com.kyrosoft.quiz.web,com.kyrosoft.quiz.config,com.kyrosoft.quiz.web" />
+    <jpa:repositories base-package="com.kyrosoft.quiz.service.impl,com.kyrosoft.quiz.web.rest" />
 
     <bean id="loadTimeWeaver" class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />
 
@@ -50,5 +53,20 @@
           c:_0-ref="emf" />
 
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
+    <mvc:annotation-driven />
+
+    <mvc:resources mapping="/resources/**" location="/pages/bower_components" />
+    <mvc:resources mapping="/pages/**" location="/pages/" />
+    <mvc:resources mapping="/images/**" location="/images/" />
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    </bean>
 
 </beans>

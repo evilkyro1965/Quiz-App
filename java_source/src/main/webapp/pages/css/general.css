@@ -327,3 +327,16 @@ body {
 .pageHeader {
     margin-bottom:10px;
 }
+
+.progress-animated {
+    display:none;
+}
+
+.progress-animated, .progress-bar {
+    height:22px;
+    width:100%;
+}
+
+.progress-animated .progress-bar {
+     background: url("../images/progressbar.gif") !important;
+}

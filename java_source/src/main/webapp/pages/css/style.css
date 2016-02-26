@@ -1,3 +1,18 @@
 .createQuiz {
     margin-bottom:10px;
 }
+.uploadedFiles p.file {
+    margin:10px 0px;
+}
+.uploadedFiles p.file img {
+    max-width:300px;
+    max-height:100px;
+}
+
+.existedFiles div.file {
+    margin:10px 0px;
+}
+.existedFiles div.file img {
+    max-width:300px;
+    max-height:100px;
+}

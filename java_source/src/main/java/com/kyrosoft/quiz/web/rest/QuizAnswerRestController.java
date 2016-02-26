@@ -9,6 +9,7 @@ import com.kyrosoft.quiz.entity.dto.QuizSearchCriteria;
 import com.kyrosoft.quiz.entity.dto.SearchResult;
 import com.kyrosoft.quiz.service.QuizAnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("rest/quiz-answer")
-@Transactional
 public class QuizAnswerRestController extends BaseRestController {
 
     @Autowired
