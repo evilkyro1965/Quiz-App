@@ -30,6 +30,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.2.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:4.2.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-test:4.2.1.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-test:4.0.3.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-jpa:1.4.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-commons:1.6.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.2.1.RELEASE" />

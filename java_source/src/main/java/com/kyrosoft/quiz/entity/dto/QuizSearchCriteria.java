@@ -9,6 +9,8 @@ public class QuizSearchCriteria extends BaseSearchParameters {
 
     private Long categoryId;
 
+    private String name;
+
     public QuizSearchCriteria() {}
 
     public Long getUserId() {
@@ -25,5 +27,13 @@ public class QuizSearchCriteria extends BaseSearchParameters {
 
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

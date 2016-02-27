@@ -1,15 +1,14 @@
 package com.kyrosoft.quiz.web.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kyrosoft.quiz.entity.Quiz;
-import com.kyrosoft.quiz.entity.QuizCategory;
-import com.kyrosoft.quiz.entity.UserQuizAnswer;
-import com.kyrosoft.quiz.entity.dto.UserQuizAnswerSearchCriteria;
+import com.kyrosoft.quiz.entity.QuizSession;
+import com.kyrosoft.quiz.entity.dto.UserSessionSearchCriteria;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
@@ -29,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 @ContextConfiguration({"/RestTestConf.xml"})
 @SqlGroup({ @Sql(scripts = "/sql/test-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)})
-public class UserQuizAnswerRestControllerTest extends BaseTest {
+public class QuizSessionAnswerRestControllerTest extends BaseTest {
 
     /**
      * Represents the web application context.
@@ -51,18 +50,19 @@ public class UserQuizAnswerRestControllerTest extends BaseTest {
     }
 
     @Test
+    @WithMockUser(username = "test",roles={"LECTURER"})
     public void testCreateUserQuizQuestionRest() throws Exception {
         createUser();
         createQuizCategory();
         createQuiz();
 
-        UserQuizAnswer userQuizAnswer = new UserQuizAnswer();
+        QuizSession userQuizAnswer = new QuizSession();
         userQuizAnswer.setQuiz(this.quiz);
         userQuizAnswer.setUser(this.user);
         userQuizAnswer.setUserOwnedId(this.user.getId());
         ObjectMapper objectMapper = new ObjectMapper();
 
-        mockMvc.perform(post("/rest/user-quiz-answer/create").contentType(MediaType.APPLICATION_JSON_VALUE)
+        mockMvc.perform(post("/rest/quiz-session/create").contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(userQuizAnswer)).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
@@ -74,7 +74,7 @@ public class UserQuizAnswerRestControllerTest extends BaseTest {
         createQuizCategory();
         createQuiz();
 
-        UserQuizAnswer userQuizAnswer = new UserQuizAnswer();
+        QuizSession userQuizAnswer = new QuizSession();
         userQuizAnswer.setQuiz(this.quiz);
         userQuizAnswer.setUser(this.user);
         userQuizAnswer.setUserOwnedId(this.user.getId());
@@ -82,7 +82,7 @@ public class UserQuizAnswerRestControllerTest extends BaseTest {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        mockMvc.perform(post("/rest/user-quiz-answer/update/"+userQuizAnswer.getId()).contentType(MediaType.APPLICATION_JSON_VALUE)
+        mockMvc.perform(post("/rest/quiz-session/update/"+userQuizAnswer.getId()).contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(userQuizAnswer)).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
@@ -94,7 +94,7 @@ public class UserQuizAnswerRestControllerTest extends BaseTest {
         createQuizCategory();
         createQuiz();
 
-        UserQuizAnswer userQuizAnswer = new UserQuizAnswer();
+        QuizSession userQuizAnswer = new QuizSession();
         userQuizAnswer.setQuiz(this.quiz);
         userQuizAnswer.setUser(this.user);
         userQuizAnswer.setUserOwnedId(this.user.getId());
@@ -102,7 +102,7 @@ public class UserQuizAnswerRestControllerTest extends BaseTest {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        mockMvc.perform(post("/rest/user-quiz-answer/delete/"+userQuizAnswer.getId()).contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(post("/rest/quiz-session/delete/"+userQuizAnswer.getId()).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
 
     }
@@ -113,18 +113,18 @@ public class UserQuizAnswerRestControllerTest extends BaseTest {
         createQuizCategory();
         createQuiz();
 
-        UserQuizAnswer userQuizAnswer = new UserQuizAnswer();
+        QuizSession userQuizAnswer = new QuizSession();
         userQuizAnswer.setQuiz(this.quiz);
         userQuizAnswer.setUser(this.user);
         userQuizAnswer.setUserOwnedId(this.user.getId());
         userQuizAnswerService.save(userQuizAnswer);
 
-        UserQuizAnswerSearchCriteria criteria = new UserQuizAnswerSearchCriteria();
+        UserSessionSearchCriteria criteria = new UserSessionSearchCriteria();
         criteria.setQuizId(this.quiz.getId());
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        mockMvc.perform(post("/rest/user-quiz-answer/search").contentType(MediaType.APPLICATION_JSON_VALUE)
+        mockMvc.perform(post("/rest/quiz-session/search").contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(criteria)).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 

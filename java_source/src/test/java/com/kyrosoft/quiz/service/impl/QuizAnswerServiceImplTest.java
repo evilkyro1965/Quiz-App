@@ -13,12 +13,13 @@ public class QuizAnswerServiceImplTest extends BaseTest {
 
     @Test
     public void createQuizAnswerTest() throws ServiceException, DatabasePersistenceException {
-        createUserQuizAnswer();
+        createQuizSession();
+        createQuizQuestion();
 
         MultipleChoiceQuizAnswer quizAnswer = new MultipleChoiceQuizAnswer();
-        quizAnswer.setNo(1);
         quizAnswer.setAnswer(MultipleChoiceAnswer.A);
-        quizAnswer.setUserQuizAnswer(this.userQuizAnswer);
+        quizAnswer.setQuestion(this.quizQuestion);
+        quizAnswer.setQuizSession(this.quizSession);
         quizAnswer.setUserOwnedId(IdTest);
 
         quizAnswerService.save(quizAnswer);
@@ -26,12 +27,12 @@ public class QuizAnswerServiceImplTest extends BaseTest {
 
     @Test
     public void updateQuizAnswerTest() throws ServiceException, DatabasePersistenceException {
-        createUserQuizAnswer();
+        createQuizSession();
 
         MultipleChoiceQuizAnswer quizAnswer = new MultipleChoiceQuizAnswer();
-        quizAnswer.setNo(1);
         quizAnswer.setAnswer(MultipleChoiceAnswer.A);
-        quizAnswer.setUserQuizAnswer(this.userQuizAnswer);
+        quizAnswer.setQuestion(this.quizQuestion);
+        quizAnswer.setQuizSession(this.quizSession);
         quizAnswer.setUserOwnedId(IdTest);
 
         quizAnswerService.save(quizAnswer);

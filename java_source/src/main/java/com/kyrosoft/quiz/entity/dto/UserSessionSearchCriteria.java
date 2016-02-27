@@ -3,13 +3,15 @@ package com.kyrosoft.quiz.entity.dto;
 /**
  * Created by Administrator on 2/20/2016.
  */
-public class UserQuizAnswerSearchCriteria extends BaseSearchParameters {
+public class UserSessionSearchCriteria extends BaseSearchParameters {
 
     private Long userId;
 
     private Long quizId;
 
-    public UserQuizAnswerSearchCriteria() {}
+    private Boolean isCompleted;
+
+    public UserSessionSearchCriteria() {}
 
     public Long getUserId() {
         return userId;
@@ -27,4 +29,11 @@ public class UserQuizAnswerSearchCriteria extends BaseSearchParameters {
         this.quizId = quizId;
     }
 
+    public Boolean getCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(Boolean completed) {
+        isCompleted = completed;
+    }
 }

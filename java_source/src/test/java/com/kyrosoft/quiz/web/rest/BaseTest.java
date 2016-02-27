@@ -7,10 +7,7 @@ import com.kyrosoft.quiz.service.*;
 import com.kyrosoft.quiz.service.impl.SaveHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.EntityManagerFactory;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 public abstract class BaseTest {
 
@@ -34,7 +31,7 @@ public abstract class BaseTest {
 
     protected User user;
 
-    protected UserQuizAnswer userQuizAnswer;
+    protected QuizSession userQuizAnswer;
 
     @Autowired
     SaveHelper saveHelper;
@@ -49,7 +46,7 @@ public abstract class BaseTest {
     QuizQuestionService quizQuestionService;
 
     @Autowired
-    UserQuizAnswerService userQuizAnswerService;
+    QuizSessionService userQuizAnswerService;
 
     @Autowired
     QuizAnswerService quizAnswerService;
@@ -90,6 +87,7 @@ public abstract class BaseTest {
         user.setEmail(stringTest);
         user.setWorkCompany(stringTest);
         user.setSchool(stringTest);
+        user.setUsername(stringTest);
 
         save(user);
         this.user = user;
@@ -118,8 +116,8 @@ public abstract class BaseTest {
         return quizQuestion;
     }
 
-    protected UserQuizAnswer createUserQuizAnswer() throws ServiceException, DatabasePersistenceException {
-        UserQuizAnswer userQuizAnswer = new UserQuizAnswer();
+    protected QuizSession createUserQuizAnswer() throws ServiceException, DatabasePersistenceException {
+        QuizSession userQuizAnswer = new QuizSession();
         userQuizAnswer.setQuiz(this.quiz);
         userQuizAnswer.setUser(this.user);
         userQuizAnswer.setUserOwnedId(this.user.getId());

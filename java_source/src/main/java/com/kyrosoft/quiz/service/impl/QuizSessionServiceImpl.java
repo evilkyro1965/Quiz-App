@@ -2,10 +2,9 @@ package com.kyrosoft.quiz.service.impl;
 
 import com.kyrosoft.quiz.DatabasePersistenceException;
 import com.kyrosoft.quiz.ServiceException;
-import com.kyrosoft.quiz.entity.UserQuizAnswer;
-import com.kyrosoft.quiz.entity.dto.SearchResult;
-import com.kyrosoft.quiz.entity.dto.UserQuizAnswerSearchCriteria;
-import com.kyrosoft.quiz.service.UserQuizAnswerService;
+import com.kyrosoft.quiz.entity.QuizSession;
+import com.kyrosoft.quiz.entity.dto.UserSessionSearchCriteria;
+import com.kyrosoft.quiz.service.QuizSessionService;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,16 +15,16 @@ import javax.persistence.Query;
  */
 @Repository
 @Transactional
-public class UserQuizAnswerServiceImpl extends BaseServiceImpl<UserQuizAnswer,UserQuizAnswerSearchCriteria>
-    implements UserQuizAnswerService {
+public class QuizSessionServiceImpl extends BaseServiceImpl<QuizSession,UserSessionSearchCriteria>
+    implements QuizSessionService {
 
-    public UserQuizAnswerServiceImpl() {
-        super(UserQuizAnswer.class);
+    public QuizSessionServiceImpl() {
+        super(QuizSession.class);
     }
 
 
     @Override
-    protected String generateWhereClause(UserQuizAnswerSearchCriteria criteria) throws ServiceException {
+    protected String generateWhereClause(UserSessionSearchCriteria criteria) throws ServiceException {
         StringBuffer sb = new StringBuffer("WHERE (1=1)");
 
         if (criteria.getUserId() != null) {
@@ -36,11 +35,15 @@ public class UserQuizAnswerServiceImpl extends BaseServiceImpl<UserQuizAnswer,Us
             sb.append(" AND e.quiz.id = :quizId");
         }
 
+        if (criteria.getCompleted() != null) {
+            sb.append(" AND e.isCompleted = :isCompleted");
+        }
+
         return sb.toString();
     }
 
     @Override
-    protected void populateQueryParameters(Query query, UserQuizAnswerSearchCriteria criteria) throws ServiceException {
+    protected void populateQueryParameters(Query query, UserSessionSearchCriteria criteria) throws ServiceException {
         if (criteria.getUserId() != null) {
             query.setParameter("userOwnedId", criteria.getUserId());
         }
@@ -48,25 +51,29 @@ public class UserQuizAnswerServiceImpl extends BaseServiceImpl<UserQuizAnswer,Us
         if (criteria.getQuizId() != null) {
             query.setParameter("quizId", criteria.getQuizId());
         }
+
+        if (criteria.getCompleted() != null) {
+            query.setParameter("isCompleted", criteria.getCompleted());
+        }
     }
 
-    public UserQuizAnswer get(long id) {
-        UserQuizAnswer userQuizAnswer = entityManager.find(UserQuizAnswer.class,id);
+    public QuizSession get(long id) {
+        QuizSession userQuizAnswer = entityManager.find(QuizSession.class,id);
         return userQuizAnswer;
     }
 
-    public UserQuizAnswer save(UserQuizAnswer userQuizAnswer) throws ServiceException, DatabasePersistenceException {
+    public QuizSession save(QuizSession userQuizAnswer) throws ServiceException, DatabasePersistenceException {
         entityManager.persist(userQuizAnswer);
         return userQuizAnswer;
     }
 
-    public UserQuizAnswer update(UserQuizAnswer userQuizAnswer) throws ServiceException, DatabasePersistenceException {
+    public QuizSession update(QuizSession userQuizAnswer) throws ServiceException, DatabasePersistenceException {
         entityManager.merge(userQuizAnswer);
         return userQuizAnswer;
     }
 
     public void delete(Long id) throws ServiceException, DatabasePersistenceException {
-        UserQuizAnswer userQuizAnswer = entityManager.find(UserQuizAnswer.class,id);
+        QuizSession userQuizAnswer = entityManager.find(QuizSession.class,id);
         entityManager.remove(userQuizAnswer);
     }
 }

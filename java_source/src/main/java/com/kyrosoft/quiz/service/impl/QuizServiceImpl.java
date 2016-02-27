@@ -35,6 +35,10 @@ public class QuizServiceImpl extends BaseServiceImpl<Quiz,QuizSearchCriteria>
             sb.append(" AND e.category.id = :categoryId");
         }
 
+        if (criteria.getName() != null && !criteria.getName().trim().equals("") ) {
+            sb.append(" AND e.name LIKE :name");
+        }
+
         return sb.toString();
     }
 
@@ -46,6 +50,10 @@ public class QuizServiceImpl extends BaseServiceImpl<Quiz,QuizSearchCriteria>
 
         if (criteria.getCategoryId() != null) {
             query.setParameter("categoryId", criteria.getCategoryId());
+        }
+
+        if (criteria.getName() != null && !criteria.getName().trim().equals("") ) {
+            query.setParameter("name", criteria.getName());
         }
     }
 

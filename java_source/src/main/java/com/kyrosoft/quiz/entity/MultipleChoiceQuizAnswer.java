@@ -15,44 +15,26 @@ import javax.persistence.*;
 public class MultipleChoiceQuizAnswer extends UserOwnedEntity {
 
     /**
-     * No
-     */
-    @Basic
-    private Integer no;
-
-    /**
      * Answer
      */
     @Enumerated(EnumType.STRING)
     private MultipleChoiceAnswer answer;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="questionId")
+    private QuizQuestion question;
+
     /**
      * User Quiz Answer
      */
     @ManyToOne(fetch= FetchType.EAGER)
-    @JoinColumn(name="userQuizAnswerId")
-    private UserQuizAnswer userQuizAnswer;
+    @JoinColumn(name="quizSessionId")
+    private QuizSession quizSession;
 
     /**
      * Empty constructor
      */
     public MultipleChoiceQuizAnswer() {}
-
-    /**
-     * Get the no
-     * @return The no
-     */
-    public Integer getNo() {
-        return no;
-    }
-
-    /**
-     * Set the no
-     * @param no The no
-     */
-    public void setNo(Integer no) {
-        this.no = no;
-    }
 
     /**
      * Get the answer
@@ -70,19 +52,19 @@ public class MultipleChoiceQuizAnswer extends UserOwnedEntity {
         this.answer = answer;
     }
 
-    /**
-     * Get the user quiz answer
-     * @return The user quiz answer
-     */
-    public UserQuizAnswer getUserQuizAnswer() {
-        return userQuizAnswer;
+    public QuizSession getQuizSession() {
+        return quizSession;
     }
 
-    /**
-     * Set the user quiz answer
-     * @param userQuizAnswer The user quiz answer
-     */
-    public void setUserQuizAnswer(UserQuizAnswer userQuizAnswer) {
-        this.userQuizAnswer = userQuizAnswer;
+    public void setQuizSession(QuizSession quizSession) {
+        this.quizSession = quizSession;
+    }
+
+    public QuizQuestion getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(QuizQuestion question) {
+        this.question = question;
     }
 }

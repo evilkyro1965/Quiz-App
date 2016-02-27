@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
@@ -51,6 +52,7 @@ public class QuizAnswerRestControllerTest extends BaseTest {
     }
 
     @Test
+    @WithMockUser(username = "test",roles={"LECTURER"})
     public void testCreateQuizAnswerRest() throws Exception {
         createUser();
         createQuizCategory();
@@ -58,9 +60,8 @@ public class QuizAnswerRestControllerTest extends BaseTest {
         createUserQuizAnswer();
 
         MultipleChoiceQuizAnswer quizAnswer = new MultipleChoiceQuizAnswer();
-        quizAnswer.setNo(1);
         quizAnswer.setAnswer(MultipleChoiceAnswer.A);
-        quizAnswer.setUserQuizAnswer(this.userQuizAnswer);
+        quizAnswer.setQuizSession(this.userQuizAnswer);
         quizAnswer.setUserOwnedId(IdTest);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -79,9 +80,8 @@ public class QuizAnswerRestControllerTest extends BaseTest {
         createUserQuizAnswer();
 
         MultipleChoiceQuizAnswer quizAnswer = new MultipleChoiceQuizAnswer();
-        quizAnswer.setNo(1);
         quizAnswer.setAnswer(MultipleChoiceAnswer.A);
-        quizAnswer.setUserQuizAnswer(this.userQuizAnswer);
+        quizAnswer.setQuizSession(this.userQuizAnswer);
         quizAnswer.setUserOwnedId(IdTest);
         quizAnswerService.save(quizAnswer);
 

@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2/20/2016.
  */
@@ -23,7 +25,7 @@ public class QuizAnswerRestController extends BaseRestController {
     @Autowired
     QuizAnswerService quizAnswerService;
 
-    @RequestMapping(value = "/create", method= RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     public MultipleChoiceQuizAnswer create(@RequestBody MultipleChoiceQuizAnswer quizAnswer) throws ServiceException,
             DatabasePersistenceException {
 
@@ -32,12 +34,51 @@ public class QuizAnswerRestController extends BaseRestController {
         return quizAnswer;
     }
 
-    @RequestMapping(value = "/update/{id}", method= RequestMethod.POST)
-    public MultipleChoiceQuizAnswer update(@RequestBody MultipleChoiceQuizAnswer quizAnswer,@PathVariable long id) throws ServiceException,
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public MultipleChoiceQuizAnswer update(@RequestBody MultipleChoiceQuizAnswer quizAnswer, @PathVariable long id) throws ServiceException,
             DatabasePersistenceException {
 
         quizAnswerService.update(quizAnswer);
         return quizAnswer;
+    }
+
+    @RequestMapping(value = "/create-all", method = RequestMethod.POST)
+    public void create(@RequestBody List<MultipleChoiceQuizAnswer> quizAnswerList) throws ServiceException,
+            DatabasePersistenceException {
+
+        if (quizAnswerList != null) {
+            for (MultipleChoiceQuizAnswer quizAnswer : quizAnswerList) {
+                MultipleChoiceQuizAnswer src = quizAnswerService.get(
+                        quizAnswer.getQuizSession().getId(),
+                        quizAnswer.getQuestion().getId());
+
+                if (src != null) {
+                    src.setAnswer(quizAnswer.getAnswer());
+                    quizAnswerService.update(src);
+                } else {
+                    quizAnswerService.save(quizAnswer);
+                }
+            }
+        }
+
+    }
+
+    @RequestMapping(value = "/get-session-answers/{id}", method = RequestMethod.POST)
+    public List<MultipleChoiceQuizAnswer> getSessionAnswers(@PathVariable Long id) throws ServiceException,
+            DatabasePersistenceException {
+
+        List<MultipleChoiceQuizAnswer> answers = quizAnswerService.getAnswerList(id);
+
+        if(answers!=null) {
+            for(MultipleChoiceQuizAnswer answer:answers) {
+                answer.getQuizSession().setAnswers(null);
+                answer.getQuestion().setChoiceImageList(null);
+                answer.getQuestion().setQuestionImageList(null);
+                answer.getQuestion().getQuiz().setQuestionList(null);
+            }
+        }
+
+        return answers;
     }
 
 }

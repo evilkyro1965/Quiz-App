@@ -41,7 +41,9 @@ public abstract class BaseTest {
 
     protected User user;
 
-    protected UserQuizAnswer userQuizAnswer;
+    protected QuizSession quizSession;
+
+    protected QuizQuestion quizQuestion;
 
     @Autowired
     SaveHelper saveHelper;
@@ -56,7 +58,7 @@ public abstract class BaseTest {
     QuizQuestionService quizQuestionService;
 
     @Autowired
-    UserQuizAnswerService userQuizAnswerService;
+    QuizSessionService quizSessionService;
 
     @Autowired
     QuizAnswerService quizAnswerService;
@@ -103,18 +105,37 @@ public abstract class BaseTest {
         return user;
     }
 
-    protected UserQuizAnswer createUserQuizAnswer() throws ServiceException, DatabasePersistenceException {
+    protected QuizSession createQuizSession() throws ServiceException, DatabasePersistenceException {
         createUser();
         createQuizCategory();
         createQuiz();
 
-        UserQuizAnswer userQuizAnswer = new UserQuizAnswer();
-        userQuizAnswer.setQuiz(this.quiz);
-        userQuizAnswer.setUser(this.user);
-        userQuizAnswer.setUserOwnedId(this.user.getId());
-        save(userQuizAnswer);
-        this.userQuizAnswer = userQuizAnswer;
-        return userQuizAnswer;
+        QuizSession quizSession = new QuizSession();
+        quizSession.setQuiz(this.quiz);
+        quizSession.setUser(this.user);
+        quizSession.setUserOwnedId(this.user.getId());
+        save(quizSession);
+        this.quizSession = quizSession;
+        return quizSession;
+    }
+
+    protected QuizQuestion createQuizQuestion() throws ServiceException, DatabasePersistenceException {
+        createUser();
+        createQuizCategory();
+        createQuiz();
+
+        QuizQuestion quizQuestion = new QuizQuestion();
+        quizQuestion.setNo(1);
+        quizQuestion.setQuestion(stringTest);
+        quizQuestion.setChoiceA(stringTest);
+        quizQuestion.setChoiceB(stringTest);
+        quizQuestion.setChoiceC(stringTest);
+        quizQuestion.setChoiceD(stringTest);
+        quizQuestion.setQuiz(this.quiz);
+        quizQuestion.setUserOwnedId(this.user.getId());
+        save(quizQuestion);
+        this.quizQuestion = quizQuestion;
+        return quizQuestion;
     }
 
 }

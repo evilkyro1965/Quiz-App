@@ -2,9 +2,9 @@ package com.kyrosoft.quiz.service.impl;
 
 import com.kyrosoft.quiz.DatabasePersistenceException;
 import com.kyrosoft.quiz.ServiceException;
-import com.kyrosoft.quiz.entity.UserQuizAnswer;
+import com.kyrosoft.quiz.entity.QuizSession;
 import com.kyrosoft.quiz.entity.dto.SearchResult;
-import com.kyrosoft.quiz.entity.dto.UserQuizAnswerSearchCriteria;
+import com.kyrosoft.quiz.entity.dto.UserSessionSearchCriteria;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
@@ -12,7 +12,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Created by Administrator on 2/20/2016.
  */
-public class UserQuizAnswerServiceImplTest extends BaseTest {
+public class QuizSessionServiceImplTest extends BaseTest {
 
     @Test
     public void createUserQuizAnswerTest() throws ServiceException, DatabasePersistenceException {
@@ -20,12 +20,12 @@ public class UserQuizAnswerServiceImplTest extends BaseTest {
         createQuizCategory();
         createQuiz();
 
-        UserQuizAnswer userQuizAnswer = new UserQuizAnswer();
+        QuizSession userQuizAnswer = new QuizSession();
         userQuizAnswer.setQuiz(this.quiz);
         userQuizAnswer.setUser(this.user);
         userQuizAnswer.setUserOwnedId(this.user.getId());
 
-        userQuizAnswerService.save(userQuizAnswer);
+        quizSessionService.save(userQuizAnswer);
     }
 
     @Test
@@ -34,21 +34,21 @@ public class UserQuizAnswerServiceImplTest extends BaseTest {
         createQuizCategory();
         createQuiz();
 
-        UserQuizAnswer userQuizAnswer = new UserQuizAnswer();
+        QuizSession userQuizAnswer = new QuizSession();
         userQuizAnswer.setQuiz(this.quiz);
         userQuizAnswer.setUser(this.user);
         userQuizAnswer.setUserOwnedId(this.user.getId());
 
-        userQuizAnswerService.save(userQuizAnswer);
+        quizSessionService.save(userQuizAnswer);
 
-        UserQuizAnswer updating = new UserQuizAnswer();
+        QuizSession updating = new QuizSession();
         updating.setId(userQuizAnswer.getId());
         updating.setQuiz(this.quiz);
         updating.setUser(this.user);
         updating.setUserOwnedId(this.user.getId());
         updating.setRightAnswer(9);
         updating.setWrongAnswer(1);
-        userQuizAnswerService.update(updating);
+        quizSessionService.update(updating);
     }
 
     @Test
@@ -57,14 +57,14 @@ public class UserQuizAnswerServiceImplTest extends BaseTest {
         createQuizCategory();
         createQuiz();
 
-        UserQuizAnswer userQuizAnswer = new UserQuizAnswer();
+        QuizSession userQuizAnswer = new QuizSession();
         userQuizAnswer.setQuiz(this.quiz);
         userQuizAnswer.setUser(this.user);
         userQuizAnswer.setUserOwnedId(this.user.getId());
 
-        userQuizAnswerService.save(userQuizAnswer);
+        quizSessionService.save(userQuizAnswer);
 
-        userQuizAnswerService.delete(userQuizAnswer.getId());
+        quizSessionService.delete(userQuizAnswer.getId());
     }
 
     @Test
@@ -73,19 +73,19 @@ public class UserQuizAnswerServiceImplTest extends BaseTest {
         createQuizCategory();
         createQuiz();
 
-        UserQuizAnswer userQuizAnswer = new UserQuizAnswer();
+        QuizSession userQuizAnswer = new QuizSession();
         userQuizAnswer.setQuiz(this.quiz);
         userQuizAnswer.setUser(this.user);
         userQuizAnswer.setUserOwnedId(this.user.getId());
 
-        userQuizAnswerService.save(userQuizAnswer);
+        quizSessionService.save(userQuizAnswer);
 
-        UserQuizAnswerSearchCriteria criteria = new UserQuizAnswerSearchCriteria();
+        UserSessionSearchCriteria criteria = new UserSessionSearchCriteria();
         criteria.setQuizId(this.quiz.getId());
         criteria.setUserId(this.user.getId());
 
-        SearchResult<UserQuizAnswer> searchResult = new SearchResult<UserQuizAnswer>();
-        searchResult = userQuizAnswerService.search(criteria);
+        SearchResult<QuizSession> searchResult = new SearchResult<QuizSession>();
+        searchResult = quizSessionService.search(criteria);
         assertNotNull(searchResult);
         assertNotNull(searchResult.getValues());
         assertNotNull(searchResult.getValues().get(0));

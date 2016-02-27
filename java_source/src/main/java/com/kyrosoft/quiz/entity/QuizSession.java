@@ -1,19 +1,20 @@
 package com.kyrosoft.quiz.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Administrator on 2/18/2016.
  */
-@Entity(name="user_quiz_answer")
-public class UserQuizAnswer extends UserOwnedEntity {
+@Entity(name="quiz_session")
+public class QuizSession extends UserOwnedEntity {
 
     @ManyToOne(fetch= FetchType.EAGER)
     @JoinColumn(name="userId")
     private User user;
 
-    @OneToMany(mappedBy = "userQuizAnswer",cascade={CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(mappedBy = "quizSession",cascade={CascadeType.MERGE, CascadeType.PERSIST})
     private List<MultipleChoiceQuizAnswer> answers;
 
     @ManyToOne(fetch= FetchType.EAGER)
@@ -26,7 +27,16 @@ public class UserQuizAnswer extends UserOwnedEntity {
     @Basic
     private Integer wrongAnswer;
 
-    public UserQuizAnswer() {}
+    @Basic
+    private Boolean isCompleted;
+
+    @Basic
+    private Date start;
+
+    @Basic
+    private Date done;
+
+    public QuizSession() {}
 
     public User getUser() {
         return user;
@@ -66,5 +76,29 @@ public class UserQuizAnswer extends UserOwnedEntity {
 
     public void setWrongAnswer(Integer wrongAnswer) {
         this.wrongAnswer = wrongAnswer;
+    }
+
+    public Boolean getCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(Boolean completed) {
+        isCompleted = completed;
+    }
+
+    public Date getStart() {
+        return start;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public Date getDone() {
+        return done;
+    }
+
+    public void setDone(Date done) {
+        this.done = done;
     }
 }

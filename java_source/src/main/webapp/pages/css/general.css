@@ -64,6 +64,12 @@ body {
 
 .clear { clear: both; }
 
+.fixFloat:after {
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+}
 /*==================================================
  * Bottom Shadow
  * ===============================================*/
@@ -339,4 +345,12 @@ body {
 
 .progress-animated .progress-bar {
      background: url("../images/progressbar.gif") !important;
+}
+
+.searchForm .horizontalFormList {
+    padding:0px;
+}
+.searchForm .searchButton {
+    float:right;
+    margin:15px 0px;
 }

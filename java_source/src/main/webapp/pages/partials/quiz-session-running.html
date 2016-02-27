@@ -1,0 +1,50 @@
+<h1 class="pageHeader">Quiz : {{quizSession.quiz.name}}</h1>
+
+<div class="panel panel-default questionWrapper" ng-repeat="question in quizQuestionList">
+    <div class="panel-heading questionContent fixFloat">
+        <div ng-bind="question.no"></div>
+        <div>&nbsp;)&nbsp;</div>
+        <div ng-bind-html="question.question"></div>
+    </div>
+    <div class="panel-body">
+        <div class="choiceContent fixFloat">
+            <input type="radio" value="A" ng-model="question.answer" />
+            <span class="choiceLabel">&nbsp;A&nbsp;)&nbsp;</span>
+            <span class="choiceDesc" ng-bind-html="question.choiceA"></span>
+        </div>
+        <div class="choiceContent fixFloat">
+            <input type="radio" value="B" ng-model="question.answer" />
+            <span class="choiceLabel">&nbsp;B&nbsp;)&nbsp;</span>
+            <span class="choiceDesc" ng-bind-html="question.choiceB"></span>
+        </div>
+        <div class="choiceContent fixFloat">
+            <input type="radio" value="C" ng-model="question.answer" />
+            <span class="choiceLabel">&nbsp;C&nbsp;)&nbsp;</span>
+            <span class="choiceDesc" ng-bind-html="question.choiceC"></span>
+        </div>
+        <div class="choiceContent fixFloat">
+            <input type="radio" value="D" ng-model="question.answer" />
+            <span class="choiceLabel">&nbsp;D&nbsp;)&nbsp;</span>
+            <span class="choiceDesc" ng-bind-html="question.choiceD"></span>
+        </div>
+    </div>
+</div>
+
+<div class="answerNavWrapper">
+    <a class="btn btn-sm btn-default" href="javascript:;" ng-click="saveProgress()">
+        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+        Save Progress
+    </a>
+    <a class="btn btn-sm btn-default" href="javascript:;" ng-click="saveAndQuit()">
+        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+        Save and Quit
+    </a>
+    <a class="btn btn-sm btn-default" href="javascript:;" ng-show="selectedPage > 1" ng-click="prevPage()">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        Prev
+    </a>
+    <a class="btn btn-sm btn-default" href="javascript:;" ng-show="selectedPage < totalPages" ng-click="nextPage()">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        Next
+    </a>
+</div>

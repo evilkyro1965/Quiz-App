@@ -1,0 +1,58 @@
+<h1 class="pageHeader">Quiz</h1>
+<div class="searchForm">
+    <ul class="horizontalFormList">
+        <form id="formSearch">
+            <li class="fullInput">
+                <span class="labelWrapper"><label>Quiz Name</label></span>
+                <span class="inputWrapper">
+                    <span class="inputInner">
+                        <input type="text" class="inputText" ng-model="quizName" />
+                    </span>
+                </span>
+                <div class="clear"></div>
+            </li>
+            <li class="fullInput">
+                <span class="labelWrapper"><label>Category</label></span>
+                <span class="inputWrapper">
+                    <span class="inputInner">
+                        <select class="inputSelect" ng-model="category"
+                                ng-options="c as c.name for c in quizCategories track by c.id"
+                        ></select>
+                    </span>
+                </span>
+                <div class="clear"></div>
+            </li>
+        </form>
+    </ul>
+    <a class="btn btn-default searchButton" href="javascript:;" ng-click="search()">Search</a>
+</div>
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="quiz in quizList">
+        <th scope="row">{{$index + 1}}</th>
+        <td>{{quiz.name}}</td>
+        <td>{{quiz.category.name}}</td>
+        <td>
+            <a class="btn btn-xs btn-default updateQuiz" href="javascript:;" ng-click="takeQuiz(quiz.id)">
+                <span class="glyphicon glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                Take Quiz
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<nav>
+    <ul id="paging" class="pagination rightPagination">
+        <li ng-repeat="page in arrPages" ng-class="{active: page == selectedPage}">
+            <a href="javascript:;" ng-click="gotoPage(page)">{{page}}</a>
+        </li>
+    </ul>
+</nav>
