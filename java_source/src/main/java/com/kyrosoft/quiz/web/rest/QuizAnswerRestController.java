@@ -5,6 +5,7 @@ import com.kyrosoft.quiz.DatabasePersistenceException;
 import com.kyrosoft.quiz.ServiceException;
 import com.kyrosoft.quiz.entity.MultipleChoiceQuizAnswer;
 import com.kyrosoft.quiz.entity.Quiz;
+import com.kyrosoft.quiz.entity.QuizSession;
 import com.kyrosoft.quiz.entity.dto.QuizSearchCriteria;
 import com.kyrosoft.quiz.entity.dto.SearchResult;
 import com.kyrosoft.quiz.service.QuizAnswerService;
@@ -45,6 +46,34 @@ public class QuizAnswerRestController extends BaseRestController {
     @RequestMapping(value = "/create-all", method = RequestMethod.POST)
     public void create(@RequestBody List<MultipleChoiceQuizAnswer> quizAnswerList) throws ServiceException,
             DatabasePersistenceException {
+
+        if (quizAnswerList != null) {
+            for (MultipleChoiceQuizAnswer quizAnswer : quizAnswerList) {
+                MultipleChoiceQuizAnswer src = quizAnswerService.get(
+                        quizAnswer.getQuizSession().getId(),
+                        quizAnswer.getQuestion().getId());
+
+                if (src != null) {
+                    src.setAnswer(quizAnswer.getAnswer());
+                    quizAnswerService.update(src);
+                } else {
+                    quizAnswerService.save(quizAnswer);
+                }
+            }
+        }
+
+    }
+
+    @RequestMapping(value = "/create-all-complete", method = RequestMethod.POST)
+    @Transactional
+    public void complete(@RequestBody List<MultipleChoiceQuizAnswer> quizAnswerList) throws ServiceException,
+            DatabasePersistenceException {
+
+        if(quizAnswerList!=null && quizAnswerList.size()>0) {
+            QuizSession quizSession = entityManager.find(QuizSession.class, quizAnswerList.get(0).getQuizSession().getId());
+            quizSession.setCompleted(true);
+            entityManager.merge(quizSession);
+        }
 
         if (quizAnswerList != null) {
             for (MultipleChoiceQuizAnswer quizAnswer : quizAnswerList) {

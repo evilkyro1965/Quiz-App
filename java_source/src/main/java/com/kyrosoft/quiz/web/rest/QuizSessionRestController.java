@@ -56,7 +56,6 @@ public class QuizSessionRestController extends BaseRestController {
         return userQuizAnswer;
     }
 
-
     @RequestMapping(value = "/delete/{id}", method= RequestMethod.POST)
     public void delete(@PathVariable long id) throws ServiceException,
             DatabasePersistenceException {

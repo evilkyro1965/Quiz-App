@@ -1,6 +1,7 @@
 var baseUrl = "http://localhost:8080";
 var baseRestUrl = baseUrl + "/rest";
 var paginationSize = 1;
+var allRow = 1000000;
 var multipleChoiceSelect = [{id:'A',name:'A'},{id:'B',name:'B'},{id:'C',name:'C'},{id:'D',name:'D'}];
 
 var quizApp = angular.module('quizApp', [
@@ -50,6 +51,10 @@ quizApp.config(['$routeProvider',
         when('/quiz-sessions', {
             templateUrl: 'partials/quiz-sessions.html',
             controller: 'QuizSessionListCtrl'
+        }).
+        when('/quiz-result/:id', {
+            templateUrl: 'partials/quiz-result.html',
+            controller: 'QuizResultCtrl'
         }).
         otherwise({
             templateUrl: 'partials/quiz-list.html',

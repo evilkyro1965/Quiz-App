@@ -34,8 +34,14 @@
         <td>
             <a class="btn btn-xs btn-default updateQuiz" href="javascript:;"
                ng-href='#/quiz-session-run/{{session.id}}' ng-show="{{session.completed!=true}}">
-                <span class="glyphicon glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
                 Resume Quiz
+            </a>
+
+            <a class="btn btn-xs btn-default updateQuiz" href="javascript:;"
+               ng-href='#/quiz-result/{{session.id}}' ng-show="{{session.completed==true}}">
+                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                Quiz Result
             </a>
         </td>
     </tr>

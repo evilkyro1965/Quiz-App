@@ -124,7 +124,6 @@ appControllers.controller('QuizSessionRunCtrl', ['$scope', '$routeParams', '$htt
         $http.post("/rest/quiz-session/get/"+$scope.id).success(function(data, status) {
             $scope.quizSession = data;
             getAnswerQuestionList($scope,$http,$sce,getQuestionListFunc);
-            //getQuestionList($scope,$http,$sce);
         });
 
         $scope.nextPage = function() {
@@ -146,6 +145,11 @@ appControllers.controller('QuizSessionRunCtrl', ['$scope', '$routeParams', '$htt
         $scope.saveAndQuit = function() {
             saveProgress($scope,$http,$sce,true);
         }
+
+        $scope.complete = function() {
+            complete($scope,$http,$sce);
+        }
+
 
         $scope.createQuiz = function() {
             location.href = baseUrl+"/pages/index.html#/quiz-question-create/"+$scope.quizId;
@@ -203,10 +207,25 @@ function saveProgress($scope,$http,$sce,isQuit) {
         arrAnswer.push(answer);
     }
     $http.post("/rest/quiz-answer/create-all",arrAnswer).success(function(data, status) {
-      console.log(status);
+        console.log(status);
         if(isQuit) {
             location.href = baseUrl+"/pages/index.html#/quiz-sessions";
         }
+    });
+}
+
+function complete($scope,$http,$sce) {
+    var arrAnswer = [];
+
+    for(var i=0;i<$scope.quizQuestionList.length;i++) {
+        var question = $scope.quizQuestionList[i];
+        var answer = question.answer;
+        var answer = {question:{id:question.id},quizSession:{id:$scope.quizSession.id},answer:answer};
+        arrAnswer.push(answer);
+    }
+    $http.post("/rest/quiz-answer/create-all-complete",arrAnswer).success(function(data, status) {
+        console.log(status);
+        location.href = baseUrl+"/pages/index.html#/quiz-result/"+$scope.quizSession.id;
     });
 }
 
