@@ -2,6 +2,9 @@ package com.kyrosoft.quiz.web.rest;
 
 import com.kyrosoft.quiz.DatabasePersistenceException;
 import com.kyrosoft.quiz.ServiceException;
+import com.kyrosoft.quiz.entity.User;
+import com.kyrosoft.quiz.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Transactional
 public class LoginRestController extends BaseRestController {
 
-    @RequestMapping(value = "/create-session", method= RequestMethod.POST)
-    public void createSession() {
+    @Autowired
+    UserService userService;
 
+    @RequestMapping(value = "/get-logged-user", method= RequestMethod.POST)
+    public User createSession() {
+        Long userId = getUserLoggedId();
+        User user = userService.get(userId);
+        return user;
     }
 
 }

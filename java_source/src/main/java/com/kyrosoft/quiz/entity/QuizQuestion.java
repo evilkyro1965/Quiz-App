@@ -18,15 +18,19 @@ public class QuizQuestion extends UserOwnedEntity {
     private Integer no;
 
     @Basic
+    @Column(length = 100000)
     private String choiceA;
 
     @Basic
+    @Column(length = 100000)
     private String choiceB;
 
     @Basic
+    @Column(length = 100000)
     private String choiceC;
 
     @Basic
+    @Column(length = 100000)
     private String choiceD;
 
     @OneToMany(mappedBy = "question",cascade={CascadeType.MERGE, CascadeType.PERSIST})
@@ -36,6 +40,7 @@ public class QuizQuestion extends UserOwnedEntity {
     private MultipleChoiceAnswer correctAnswer;
 
     @Basic
+    @Column(length = 100000)
     private String question;
 
     @OneToMany(mappedBy = "question")

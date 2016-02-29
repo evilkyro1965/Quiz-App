@@ -11,12 +11,12 @@ appControllers.controller('QuizResultCtrl', ['$scope', '$routeParams', '$http', 
 
         $http.post("/rest/quiz-session/get/"+$scope.id).success(function(data, status) {
             $scope.quizSession = data;
-            getAnswerQuestionList($scope,$http,$sce,getQuestionListFunc);
+            getAnswerQuestionList($scope,$http,$sce,getQuestionListResultFunc);
         });
 
     }]);
 
-var getQuestionListFunc = function getQuestionList($scope,$http,$sce) {
+var getQuestionListResultFunc = function getQuestionList($scope,$http,$sce) {
     var quiz = $scope.quizSession.quiz;
     var criteria = {pageSize:paginationSize,pageNumber:1,pageSize:allRow,quizId:quiz.id};
     $http.post("/rest/quiz-question/search",criteria).success(function(searchResult, status) {
@@ -41,14 +41,6 @@ var getQuestionListFunc = function getQuestionList($scope,$http,$sce) {
         }
 
         $scope.totalPages = searchResult.totalPages;
-    });
-}
-
-function getAnswerQuestionList($scope,$http,$sce,callback) {
-    $http.post("/rest/quiz-answer/get-session-answers/"+$scope.id).success(function(data, status) {
-        console.log(data);
-        $scope.quizAnswerList = data;
-        callback($scope,$http,$sce);
     });
 }
 

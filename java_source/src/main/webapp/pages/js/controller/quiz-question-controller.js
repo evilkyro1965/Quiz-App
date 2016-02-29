@@ -76,7 +76,7 @@ appControllers.controller('QuizQuestionCreateCtrl', ['$scope', '$routeParams', '
             }
 
             $http.post("/rest/quiz-question/create",quizQuestion).success(function(data, status) {
-                location.href = baseUrl+"/pages/index.html#/quiz-question-list/"+$scope.quizId;
+                location.href = baseUrl+"/pages/index.html#/quiz-question-list/"+$scope.quiz.id;
             });
         }
 
@@ -129,7 +129,6 @@ appControllers.controller('QuizQuestionUpdateCtrl', ['$scope', '$routeParams', '
                     $scope.questionImageList[i].imgDesc = "/images/"+imgSrc;
                 }
             }
-            var a = 1;
         });
 
         $('#fileupload').fileupload({
@@ -190,6 +189,7 @@ appControllers.controller('QuizQuestionUpdateCtrl', ['$scope', '$routeParams', '
 appControllers.controller('QuizQuestionListCtrl', ['$scope', '$routeParams', '$http', '$location', '$sce',
     function ($scope, $routeParams, $http, $location, $sce) {
         $scope.quizId = parseInt($routeParams.id);
+        $scope.quiz = {name:""};
         var criteria = {pageSize:paginationSize,pageNumber:1,quizId:$scope.quizId};
         $http.post("/rest/quiz-question/search",criteria).success(function(searchResult, status) {
             console.log(searchResult);
@@ -207,12 +207,20 @@ appControllers.controller('QuizQuestionListCtrl', ['$scope', '$routeParams', '$h
             }
         });
 
+        $http.post("/rest/quiz/get/"+$scope.quizId).success(function(data, status) {
+            $scope.quiz = data;
+        });
+
         $scope.gotoPage = function(page) {
             $scope.selectedPage = page;
-            criteria.pageNumber = page;
-            $http.post("/rest/quiz/search",criteria).success(function(searchResult, status) {
+            var criteria = {pageSize:paginationSize,pageNumber:$scope.selectedPage,quizId:$scope.quizId};
+            $http.post("/rest/quiz-question/search",criteria).success(function(searchResult, status) {
                 console.log(searchResult);
-                $scope.quizList = searchResult.values;
+                $scope.quizQuestionList = searchResult.values;
+                for(var i=0;i<$scope.quizQuestionList.length;i++) {
+                    $scope.quizQuestionList[i].questionSanitize = $sce.trustAsHtml($scope.quizQuestionList[i].question);
+                }
+                $scope.selectedPage = $scope.selectedPage;
             });
         }
 

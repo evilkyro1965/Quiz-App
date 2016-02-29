@@ -160,6 +160,7 @@ appControllers.controller('QuizSessionRunCtrl', ['$scope', '$routeParams', '$htt
 var getQuestionListFunc = function getQuestionList($scope,$http,$sce) {
     var quiz = $scope.quizSession.quiz;
     var criteria = {pageSize:paginationSize,pageNumber:$scope.selectedPage,quizId:quiz.id};
+    console.log(criteria);
     $http.post("/rest/quiz-question/search",criteria).success(function(searchResult, status) {
         console.log(searchResult);
         $scope.quizQuestionSearchResult = searchResult;

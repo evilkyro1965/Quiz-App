@@ -1,6 +1,6 @@
 var baseUrl = "http://localhost:8080";
 var baseRestUrl = baseUrl + "/rest";
-var paginationSize = 1;
+var paginationSize = 5;
 var allRow = 1000000;
 var multipleChoiceSelect = [{id:'A',name:'A'},{id:'B',name:'B'},{id:'C',name:'C'},{id:'D',name:'D'}];
 
@@ -57,7 +57,22 @@ quizApp.config(['$routeProvider',
             controller: 'QuizResultCtrl'
         }).
         otherwise({
-            templateUrl: 'partials/quiz-list.html',
-            controller: 'QuizListCtrl'
+            templateUrl: 'partials/landing.html',
+            controller: 'LandingCtrl'
         });
     }]);
+
+$.ajax({
+    method: "POST",
+    url: baseRestUrl+"/login/get-logged-user"
+})
+.done(function( user ) {
+    if(user.userType=="LECTURER") {
+        $("#lecturerMenu").show();
+        $("#studentMenu").hide();
+    }
+    else {
+        $("#lecturerMenu").hide();
+        $("#studentMenu").show();
+    }
+});

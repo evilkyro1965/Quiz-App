@@ -29,6 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/pages/index.html").permitAll()
                 .antMatchers("/images/**").permitAll()
+                .antMatchers("/pages/bower_components/bootstrap/dist/css/bootstrap.min.css").permitAll()
+                .antMatchers("/pages/css/**").permitAll()
                 .antMatchers("/**").access("isAuthenticated()")
                 .antMatchers("/pages/**").access("isAuthenticated()")
                 .antMatchers("/rest/**").access("isAuthenticated()")

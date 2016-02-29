@@ -1,4 +1,4 @@
-appControllers.controller('PhoneListCtrl', ['$scope', '$http',
+appControllers.controller('LandingCtrl', ['$scope', '$http',
     function ($scope, $http) {
 
     }]);

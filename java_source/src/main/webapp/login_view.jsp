@@ -6,42 +6,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Spring Security Example</title>
+    <title>Quiz App</title>
+
+    <!-- Bootstrap -->
+    <link href="pages/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="pages/css/font-awesome.min.css" rel="stylesheet">
+    <link href="pages/css/general.css" rel="stylesheet">
+    <link href="pages/css/style.css" rel="stylesheet">
 </head>
-<body class="security-app">
-<div class="details">
-    <h2>Spring Security for Spring MVC 4 Application Simple Example</h2>
-    <a
-            href="http://www.programming-free.com/2015/08/spring-security-for-spring-mvc-4.html"
-            class="button green small">Tutorial</a>
-    <a href="https://github.com/priyadb/SpringSecurityApp/archive/master.zip"
-       class="button red small">Download</a>
-</div>
+<body>
 
-<form action="/login" method="post">
+<h1 class="pageHeader">Login</h1>
 
-    <div class="lc-block">
-        <div>
-            <input type="text" class="style-4" name="username"
-                   placeholder="User Name" />
-        </div>
-        <div>
-            <input type="password" class="style-4" name="password"
-                   placeholder="Password" />
-        </div>
-        <div>
-            <input type="submit" value="Sign In" class="button red small" />
-        </div>
+<ul class="horizontalFormList">
+    <form action="/login" method="post">
+        <input type="hidden" name="${_csrf.parameterName}"
+               value="${_csrf.token}" />
         <c:if test="${param.error ne null}">
             <div class="alert-danger">Invalid username and password.</div>
         </c:if>
         <c:if test="${param.logout ne null}">
             <div class="alert-normal">You have been logged out.</div>
         </c:if>
-    </div>
-    <input type="hidden" name="${_csrf.parameterName}"
-           value="${_csrf.token}" />
-</form>
+        <li class="fullInput">
+            <span class="labelWrapper"><label>Username</label></span>
+            <span class="inputWrapper">
+                <span class="inputInner">
+                    <input type="text" class="inputText" name="username"
+                           placeholder="User Name" />
+                </span>
+            </span>
+            <div class="clear"></div>
+        </li>
+        <li class="fullInput">
+            <span class="labelWrapper"><label>Password</label></span>
+            <span class="inputWrapper">
+                <span class="inputInner">
+                    <input type="password" class="inputText" name="password"
+                           placeholder="Password" />
+                </span>
+            </span>
+            <div class="clear"></div>
+        </li>
+        <li class="fullInput">
+            <span class="labelWrapper"><label>&nbsp;</label></span>
+            <span class="inputWrapper">
+                <span class="inputInner">
+                    <input class="btn btn-default submit" type="submit" value="Sign In"></input>
+                </span>
+            </span>
+            <div class="clear"></div>
+        </li>
+    </form>
+</ul>
 
 </body>
 </html>
