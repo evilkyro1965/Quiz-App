@@ -47,7 +47,7 @@ appControllers.controller('QuizSearchCtrl', ['$scope', '$http',
             var quizSession = {quiz:{id:quizId}};
             $http.post("/rest/quiz-session/create",quizSession).success(function(data, status) {
                 var id = data.id;
-                location.href = baseUrl+"/pages/index.html#/quiz-session-run/"+id;
+                location.href = "/pages/index.html#/quiz-session-run/"+id;
             });
         }
 
@@ -152,7 +152,7 @@ appControllers.controller('QuizSessionRunCtrl', ['$scope', '$routeParams', '$htt
 
 
         $scope.createQuiz = function() {
-            location.href = baseUrl+"/pages/index.html#/quiz-question-create/"+$scope.quizId;
+            location.href = "/pages/index.html#/quiz-question-create/"+$scope.quizId;
         }
 
     }]);
@@ -210,7 +210,7 @@ function saveProgress($scope,$http,$sce,isQuit) {
     $http.post("/rest/quiz-answer/create-all",arrAnswer).success(function(data, status) {
         console.log(status);
         if(isQuit) {
-            location.href = baseUrl+"/pages/index.html#/quiz-sessions";
+            location.href = "/pages/index.html#/quiz-sessions";
         }
     });
 }
@@ -226,7 +226,7 @@ function complete($scope,$http,$sce) {
     }
     $http.post("/rest/quiz-answer/create-all-complete",arrAnswer).success(function(data, status) {
         console.log(status);
-        location.href = baseUrl+"/pages/index.html#/quiz-result/"+$scope.quizSession.id;
+        location.href = "/pages/index.html#/quiz-result/"+$scope.quizSession.id;
     });
 }
 

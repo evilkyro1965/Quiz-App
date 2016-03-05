@@ -8,7 +8,7 @@ import javax.persistence.Enumerated;
 /**
  * Created by Administrator on 2/18/2016.
  */
-@Entity(name="user")
+@Entity(name="user_table")
 public class User extends IdentifiableEntity {
 
     @Basic

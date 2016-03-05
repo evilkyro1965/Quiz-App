@@ -20,8 +20,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("select username,password,isActive as enabled from user where username = ?")
-                .authoritiesByUsernameQuery("select username,userType as role from user where username = ?");
+                .usersByUsernameQuery("select username,password,isActive as enabled from user_table where username = ?")
+                .authoritiesByUsernameQuery("select username,userType as role from user_table where username = ?");
     }
 
     @Override

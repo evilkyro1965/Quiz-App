@@ -64,7 +64,7 @@ quizApp.config(['$routeProvider',
 
 $.ajax({
     method: "POST",
-    url: baseRestUrl+"/login/get-logged-user"
+    url: "/rest/login/get-logged-user"
 })
 .done(function( user ) {
     if(user.userType=="LECTURER") {

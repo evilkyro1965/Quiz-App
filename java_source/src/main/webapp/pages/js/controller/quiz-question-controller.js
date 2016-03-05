@@ -46,7 +46,7 @@ appControllers.controller('QuizQuestionCreateCtrl', ['$scope', '$routeParams', '
             $scope.uploadedImages.push(id);
             data.context = $('<div/>').appendTo('#uploadedFiles');
                 var node = $('<p class="file" />')
-                    .append("<img src='"+baseUrl+"/images/"+filename+"' alt='' />")
+                    .append("<img src='"+"/images/"+filename+"' alt='' />")
                     .append($('<p/>').text("/images/"+filename));
                 node.appendTo(data.context);
         });
@@ -76,7 +76,7 @@ appControllers.controller('QuizQuestionCreateCtrl', ['$scope', '$routeParams', '
             }
 
             $http.post("/rest/quiz-question/create",quizQuestion).success(function(data, status) {
-                location.href = baseUrl+"/pages/index.html#/quiz-question-list/"+$scope.quiz.id;
+                location.href = "/pages/index.html#/quiz-question-list/"+$scope.quiz.id;
             });
         }
 
@@ -125,7 +125,7 @@ appControllers.controller('QuizQuestionUpdateCtrl', ['$scope', '$routeParams', '
             if($scope.questionImageList!=null) {
                 for(var i=0;i<$scope.questionImageList.length;i++) {
                     var imgSrc = $scope.questionImageList[i].imgSrc;
-                    $scope.questionImageList[i].imgUrl = baseUrl+"/images/"+imgSrc;
+                    $scope.questionImageList[i].imgUrl = "/images/"+imgSrc;
                     $scope.questionImageList[i].imgDesc = "/images/"+imgSrc;
                 }
             }
@@ -150,7 +150,7 @@ appControllers.controller('QuizQuestionUpdateCtrl', ['$scope', '$routeParams', '
                 $scope.uploadedImages.push(id);
                 data.context = $('<div/>').appendTo('#uploadedFiles');
                 var node = $('<p class="file" />')
-                    .append("<img src='"+baseUrl+"/images/"+filename+"' alt='' />")
+                    .append("<img src='"+"/images/"+filename+"' alt='' />")
                     .append($('<p/>').text("/images/"+filename));
                 node.appendTo(data.context);
             });
@@ -180,7 +180,7 @@ appControllers.controller('QuizQuestionUpdateCtrl', ['$scope', '$routeParams', '
             }
 
             $http.post("/rest/quiz-question/update/"+quizQuestion.id,quizQuestion).success(function(data, status) {
-                location.href = baseUrl+"/pages/index.html#/quiz-question-list/"+$scope.quizId;
+                location.href = "/pages/index.html#/quiz-question-list/"+$scope.quizId;
             });
         }
 
@@ -225,6 +225,6 @@ appControllers.controller('QuizQuestionListCtrl', ['$scope', '$routeParams', '$h
         }
 
         $scope.createQuiz = function() {
-            location.href = baseUrl+"/pages/index.html#/quiz-question-create/"+$scope.quizId;
+            location.href = "/pages/index.html#/quiz-question-create/"+$scope.quizId;
         }
     }]);
